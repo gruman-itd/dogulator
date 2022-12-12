@@ -1,69 +1,66 @@
-let display = "";
-let currentValue = 0;
-let tempValue = 0;
-let operatorType = "";
-let clearMe = false;
-let editing = false;
+let display = ""; // calculator display
+let currentValue = 0; // first value
+let tempValue = 0; // second value
+let operatorType = ""; // operator
+let clearMe = false; // set to clear display on button press
+let editing = false; // entering the second number
 
 function pressButton(buttonValue) {
-    if (clearMe) {
-        clearDisplay();
-        clearMe = false;
-    }
-    if (operatorType != "" || editing === true) {
-        display = "";
-        editing = false;
-    }
-        
+  // press button
+  if (clearMe) {
+    // clear everything
+    clearDisplay();
+    clearMe = false;
+  }
+  if (editing) {
+    // clear display for second number
+    display = "";
+    editing = false;
+  }
+  // concat the numbers
   display += buttonValue;
+  // set display
   document.getElementById("displayText").innerText = display;
+  // store current value
   currentValue = display;
 }
 
 function operators(type) {
-  tempValue = currentValue;
-  currentValue = 0;
-  editing = true;
-  switch (type) {
-    case "add":
-      operatorType = "add";
-      break;
-    case "subtract":
-      operatorType = "subtract";
-      break;
-    case "multiply":
-      operatorType = "multiply";
-      break;
-    case "divide":
-      operatorType = "divide";
-      break;
-  }
+  // pressed an operatpr
+  tempValue = currentValue; // store first number
+  currentValue = 0; // reset
+  editing = true; // set to enter second value
+  operatorType = type; // set operatorType
 }
 
 function pressEnter() {
-    switch (operatorType) {
-      case "add":
-        tempValue = parseInt(tempValue) + parseInt(currentValue);
-        break;
-      case "subtract":
-        tempValue = parseInt(tempValue) - parseInt(currentValue);
-        break;
-      case "multiply":
-        tempValue = parseInt(tempValue) * parseInt(currentValue);
-        break;
-      case "divide":
-        tempValue = parseInt(tempValue) / parseInt(currentValue);
-        break;
-    }
-    operatorType = "";
-    document.getElementById("displayText").innerText = tempValue;
-    currentValue = 0;
-    tempValue = 0;
-    clearMe = true;
-    editing = false;
+  // equals button
+  switch (
+    operatorType // do caulations based on operatorType
+  ) {
+    case "add":
+      tempValue = parseInt(tempValue) + parseInt(currentValue);
+      break;
+    case "subtract":
+      tempValue = parseInt(tempValue) - parseInt(currentValue);
+      break;
+    case "multiply":
+      tempValue = parseInt(tempValue) * parseInt(currentValue);
+      break;
+    case "divide":
+      tempValue = parseInt(tempValue) / parseInt(currentValue);
+      break;
+  }
+  operatorType = ""; // clear operatorType
+  document.getElementById("displayText").innerText = tempValue; // set display
+  currentValue = 0; // reset
+  tempValue = 0; // reset
+  clearMe = true; // clear value on press
+  editing = false; // clear editing
 }
 
 function clearDisplay() {
+  // clear the display
   display = "";
   document.getElementById("displayText").innerText = "0";
 }

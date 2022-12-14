@@ -6,7 +6,7 @@ let clearMe = false; // set to clear display on button press
 let editing = false; // entering the second number
 const dogs = ["dog.jpg", "dog1.jpg", "dog2.jpg", "dog3.jpg"];
 
-FchangeDog();
+changeDog();
 
 function pressButton(buttonValue) {
   // press button
